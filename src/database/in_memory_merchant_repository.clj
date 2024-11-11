@@ -1,5 +1,5 @@
 (ns database.in-memory-merchant-repository
-  (:require [domain.merchant-repository :as repo]))
+  (:require [domain.repositories.merchant-repository :as repo]))
 
 (defrecord In-memory-merchant-repository [state]
   repo/MerchantRepository
