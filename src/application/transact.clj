@@ -1,9 +1,9 @@
 (ns application.transact 
   (:require
    [domain.balance :as balance]
-   [domain.balance-repository :as balance-repo]
-   [domain.account-repository :as account-repo]
-   [domain.merchant-repository :as merchant-repo]))
+   [domain.repositories.balance-repository :as balance-repo]
+   [domain.repositories.account-repository :as account-repo]
+   [domain.repositories.merchant-repository :as merchant-repo]))
 
 (defn- choose-mcc [repo merchant-name mcc]
   (let [merchant     (merchant-repo/get-by-name repo merchant-name)
