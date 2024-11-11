@@ -1,4 +1,4 @@
 (ns domain.account-repository)
 
-(defprotocol AccountRepository
+(defprotocol AccountRepository 
   (get-by-id [this id]))

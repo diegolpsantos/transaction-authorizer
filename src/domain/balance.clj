@@ -17,7 +17,7 @@
 (defn get-balances [mcc balances]
   (filter (fn [balance]
             (or (some #(= mcc %) (:code balance))
-                #(= "cash" (:type balance))))
+                (= "cash" (:type balance))))
           balances))
 
 (defn has-balance? [amount balances]
@@ -40,14 +40,14 @@
       {:balance (update balance :total-amount - amount-to-decrease) :rest 0})
     ))
 
-(defn decrease [{:keys [mcc total-amount]} balances]
+(defn decrease [{:keys [mcc total-amount]} balances] 
   (if (has-balance? total-amount balances) 
     (let [mcc-balance  (get-mcc-balance mcc balances)
           cash-balance (cash-balance balances)]
       (cond
         (nil? mcc-balance) (decreased cash-balance total-amount)
         (< (:total-amount mcc-balance) total-amount) (let [nmcc-value (decreased mcc-balance total-amount)
-                                                           nc-value (decreased cash-balance (:rest nmcc-value))]
+                                                           nc-value   (decreased cash-balance (:rest nmcc-value))]
                                                        [nmcc-value nc-value])
         :else (decreased mcc-balance total-amount)))
     balances))

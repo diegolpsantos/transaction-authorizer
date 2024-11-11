@@ -5,8 +5,8 @@
   repo/BalanceRepository
   
   (update! [_ balance]
-    (reset! state balance))
+    (conj balance))
   
   (get-by-account-id [_ id]
     (filter #(= id (:account-id %))
-            @state)))
+            state)))

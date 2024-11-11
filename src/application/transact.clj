@@ -2,14 +2,25 @@
   (:require
    [domain.balance :as balance]
    [domain.balance-repository :as balance-repo]
-   [domain.account-repository :as account-repo]))
+   [domain.account-repository :as account-repo]
+   [domain.merchant-repository :as merchant-repo]))
 
-(defn- authorize [{:keys [mcc total-amount account-id] :as transaction} {:keys [balance-repo]}]
-  (let [account-balances (balance-repo/get-by-account-id balance-repo account-id)
-        valid-balances (balance/get-balances mcc account-balances)]
+(defn- choose-mcc [repo merchant-name mcc]
+  (let [merchant     (merchant-repo/get-by-name repo merchant-name)
+        merchant-mcc (get merchant :mcc)]
+    (cond 
+      (nil? merchant) mcc
+      (not= merchant-mcc mcc) merchant-mcc
+      :else mcc)))
+
+(defn- authorize [{:keys [mcc total-amount merchant account-id] :as transaction} {:keys [balance-repo merchant-repo]}]
+  (let [account-balances (balance-repo/get-by-account-id balance-repo account-id) 
+        chosen-mcc       (choose-mcc merchant-repo merchant mcc)
+        txn              (assoc transaction :mcc chosen-mcc)
+        valid-balances   (balance/get-balances chosen-mcc account-balances)]
     (if (balance/has-balance? total-amount valid-balances)
-      (do (let [new-balances (balance/decrease transaction valid-balances)] 
-            (balance-repo/update! balance-repo new-balances))
+      (do (let [updated-balances (balance/decrease txn valid-balances)]
+            (balance-repo/update! balance-repo updated-balances))
           {:code "00"})
       {:code "51"})))
 
