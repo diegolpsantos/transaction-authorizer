@@ -3,9 +3,8 @@
             [infra.http.routes.middleware :as middleware]))
 
 (defn transaction-handler [{:keys [body-params deps]}]
-  (let [result (transact/execute body-params deps)]
-    {:status 200
-     :body result}))
+  {:status 200
+   :body (transact/execute body-params deps)})
 
 (defn route [deps]
   ["/transactions"
