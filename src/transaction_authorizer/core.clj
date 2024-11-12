@@ -1,12 +1,16 @@
 (ns transaction-authorizer.core
-  "FIXME: my new org.corfield.new/scratch project.")
+  "FIXME: my new org.corfield.new/scratch project."
+  (:require [transaction-authorizer.system :as stm]))
 
-(defn exec
-  "Invoke me with clojure -X transaction-authorizer.core/exec"
-  [opts]
-  (println "exec with" opts))
+(defonce service nil)
 
 (defn -main
   "Invoke me with clojure -M -m transaction-authorizer.core"
   [& args]
-  (println "-main with" args))
+  (->> args
+       stm/config
+       constantly
+       (alter-var-root #'service)))
+
+(defn -close []
+  (.stop service))
