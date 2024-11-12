@@ -40,7 +40,6 @@
 (defn config [env]
   (let [deps (repositories env)
         routes                                  (-> []
-                                                    #_(into [(account-router/route account-repo)])
                                                     (into [(transaction-router/route deps)]))
         server-adapter                          (->> routes
                                                      reitit-adapter/->reitit-adapter
