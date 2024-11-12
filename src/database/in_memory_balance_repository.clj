@@ -1,5 +1,5 @@
 (ns database.in-memory-balance-repository
-  (:require [domain.repositories.balance-repository :as repo]))
+  (:require [application.repositories.balance-repository :as repo]))
 
 (defrecord In-memory-balance-repo [state]
   repo/BalanceRepository

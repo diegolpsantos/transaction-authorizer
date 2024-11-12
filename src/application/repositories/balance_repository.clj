@@ -1,4 +1,4 @@
-(ns domain.repositories.balance-repository)
+(ns application.repositories.balance-repository)
 
 (defprotocol BalanceRepository
   (update! [this balance])

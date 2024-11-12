@@ -1,4 +1,4 @@
-(ns domain.balance)
+(ns application.domain.balance)
 
 (defn- get-total-balance [balances]
   (->> balances

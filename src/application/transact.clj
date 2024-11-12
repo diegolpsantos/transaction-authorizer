@@ -1,9 +1,9 @@
 (ns application.transact 
   (:require
-   [domain.balance :as balance]
-   [domain.repositories.balance-repository :as balance-repo]
-   [domain.repositories.account-repository :as account-repo]
-   [domain.repositories.merchant-repository :as merchant-repo]))
+   [application.domain.balance :as balance]
+   [application.repositories.balance-repository :as balance-repo]
+   [application.repositories.account-repository :as account-repo]
+   [application.repositories.merchant-repository :as merchant-repo]))
 
 (defn- choose-mcc [repo merchant-name mcc]
   (let [merchant     (merchant-repo/get-by-name repo merchant-name)
@@ -13,7 +13,7 @@
       (not= merchant-mcc mcc) merchant-mcc
       :else mcc)))
 
-(defn- authorize [{:keys [mcc total-amount merchant account-id] :as transaction} {:keys [balance-repo merchant-repo]}]
+(defn- authorize [{:keys [mcc total-amount merchant account-id] :as transaction} {:keys [balance-repo merchant-repo]}] 
   (let [account-balances (balance-repo/get-by-account-id balance-repo account-id) 
         chosen-mcc       (choose-mcc merchant-repo merchant mcc)
         txn              (assoc transaction :mcc chosen-mcc)
