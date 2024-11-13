@@ -2,6 +2,7 @@
   (:require [application.http.router :as http-router]
             [application.http.http-server :as http-server]
             [infra.http.routes.transaction :as transaction-router]
+            [infra.http.routes.account :as account-router]
             [infra.http.reitit-adapter :as reitit-adapter]
             [infra.http.ring-adapter :as ring-adapter]
             [database.in-memory-account-repository :as account-repository]
@@ -14,7 +15,7 @@
 
 (def merchants (atom [{:name merchant-name :mcc "5411"}]))
 
-(def users (atom [{:id "123" :first-name "Diego" :last-name "Santos" :age 39}]))
+(def users (atom [{:id "123" :first-name "Diego" :last-name "Santos" :age 39 :document "10203040"}]))
 
 (def balances [{:id "1" :type "food" :code ["5411" "5412"] :total-amount 3000.00 :account-id "123"}
                {:id "2" :type "meal" :code ["5811" "5812"] :total-amount 2000.00 :account-id "123"}
@@ -40,6 +41,7 @@
 (defn config [env]
   (let [deps (repositories env)
         routes                                  (-> []
+                                                    (into [(account-router/route deps)])
                                                     (into [(transaction-router/route deps)]))
         server-adapter                          (->> routes
                                                      reitit-adapter/->reitit-adapter

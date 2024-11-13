@@ -1,4 +1,6 @@
 (ns application.repositories.account-repository)
 
-(defprotocol AccountRepository 
-  (get-by-id [this id]))
+(defprotocol AccountRepository
+  (create [this account])
+  (get-by-id [this id])
+  (get-by-document [this document]))
