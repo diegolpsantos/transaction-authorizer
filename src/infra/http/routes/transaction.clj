@@ -2,7 +2,7 @@
   (:require [application.transact :as transact]
             [infra.http.routes.middleware :as middleware]))
 
-(defn transaction-handler [{:keys [body-params deps]}]
+(defn- transaction-handler [{:keys [body-params deps]}]
   {:status 200
    :body (transact/execute body-params deps)})
 
