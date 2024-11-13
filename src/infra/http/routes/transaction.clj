@@ -11,6 +11,7 @@
      {:middleware [(middleware/wrap-dependencies deps)]
       :post {:summary "Authorize a transaction"
              :parameters {:body [:map
+                                 [:id string?]
                                  [:account-id string?]
                                  [:total-amount double?]
                                  [:mcc string?]

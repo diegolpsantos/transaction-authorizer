@@ -7,6 +7,7 @@
             [database.in-memory-account-repository :as account-repository]
             [database.in-memory-merchant-repository :as merchant-repository]
             [database.in-memory-balance-repository :as balance-repository]
+            [database.in-memory-transaction-repository :as transaction-repo]
             [infra.http.routes.transaction :as transaction]))
 
 (def transactions-path "/api/v1/transactions")
@@ -21,9 +22,16 @@
                {:id "2" :type "meal" :code ["5811" "5812"] :total-amount 2000.00 :account-id "123"}
                {:id "3" :type "cash" :code ["1111"] :total-amount 5000.00 :account-id "123"}])
 
-(def deps {:account-repo  (account-repository/->In-memory-account-repository users)
-           :merchant-repo (merchant-repository/->In-memory-merchant-repository merchants)
-           :balance-repo  (balance-repository/->In-memory-balance-repo balances)})
+(def transactions (atom [{:id "af5ea0ce-795c-41ee-b060-0c8788de79b5"
+                          :account-id "123"
+                          :total-amount 10000.00
+                          :mcc "5811"
+                          :merchant "PADARIA DO ZE               SAO PAULO BR"}]))
+
+(def deps {:account-repo     (account-repository/->In-memory-account-repository users)
+           :merchant-repo    (merchant-repository/->In-memory-merchant-repository merchants)
+           :balance-repo     (balance-repository/->In-memory-balance-repo balances)
+           :transaction-repo (transaction-repo/->In-memory-transaction-repository transactions)})
 
 (defn route []
   (-> deps
@@ -38,7 +46,8 @@
                            :uri            transactions-path
                            :headers        {"content-type" "application/edn"
                                             "accept"       "application/transit+json"}
-                           :body-params    {:account-id   "123"
+                           :body-params    {:id "a20b09b6-d94d-4548-b4df-0afa0ee96eb9"
+                                            :account-id   "123"
                                             :total-amount 100.00
                                             :mcc          "5811"
                                             :merchant     "PADARIA DO ZE               SAO PAULO BR"}})]
