@@ -1,6 +1,6 @@
 (ns infra.http.routes.account
   (:require [infra.http.routes.middleware :as middleware]
-            [application.create-account :as create-account]))
+            [application.usecases.accounts.create-account :as create-account]))
 
 (defn- create [{:keys [body-params deps]}]
   {:status 201

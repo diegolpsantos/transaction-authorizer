@@ -1,5 +1,5 @@
 (ns infra.http.routes.transaction
-  (:require [application.transact :as transact]
+  (:require [application.usecases.authorizations.transact :as transact]
             [infra.http.routes.middleware :as middleware]))
 
 (defn- transaction-handler [{:keys [body-params deps]}]

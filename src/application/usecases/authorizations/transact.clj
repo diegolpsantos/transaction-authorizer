@@ -1,4 +1,4 @@
-(ns application.transact 
+(ns application.usecases.authorizations.transact 
   (:require
    [application.domain.balance :as balance]
    [application.repositories.balance-repository :as balance-repo]

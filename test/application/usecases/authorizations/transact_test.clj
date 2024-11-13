@@ -1,6 +1,6 @@
-(ns application.transact-test
+(ns application.usecases.authorizations.transact-test
   (:require [clojure.test :refer [deftest is testing]]
-            [application.transact :as transact]
+            [application.usecases.authorizations.transact :as transact]
             [database.in-memory-balance-repository :as balance-repo]
             [database.in-memory-account-repository :as account-repo]
             [database.in-memory-merchant-repository :as merchant-repo]

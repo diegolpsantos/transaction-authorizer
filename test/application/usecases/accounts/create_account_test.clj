@@ -1,7 +1,7 @@
-(ns application.create-account-test
+(ns application.usecases.accounts.create-account-test
   (:require [clojure.test :refer [deftest is testing]]
             [matcher-combinators.test :refer [match?]]
-            [application.create-account :as create-account]
+            [application.usecases.accounts.create-account :as create-account]
             [database.in-memory-balance-repository :as balance-repo]
             [database.in-memory-account-repository :as account-repo]))
 

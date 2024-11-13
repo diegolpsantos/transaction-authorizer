@@ -1,4 +1,4 @@
-(ns application.create-account
+(ns application.usecases.accounts.create-account
   (:require [application.repositories.account-repository :as account-repository]
             [application.repositories.balance-repository :as balance-repository]))
 
