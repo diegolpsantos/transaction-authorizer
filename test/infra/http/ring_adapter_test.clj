@@ -1,7 +1,7 @@
 (ns infra.http.ring-adapter-test
-  (:require [utils.http-utils :as http-utils]
-            [clojure.test :refer [deftest testing is]]
+  (:require [clojure.test :refer [deftest testing is]]
             [matcher-combinators.test :refer [match?]]
+            [utils.http-utils :as http-utils]
             [application.http.http-server :as http-server]
             [infra.http.ring-adapter :as ring-adapter]))
 
