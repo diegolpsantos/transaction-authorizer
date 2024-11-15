@@ -14,7 +14,7 @@
   (atom [{:id "123" :first-name "Diego" :last-name "Santos" :age 39 :document "10203040"}]))
 
 (def deps
-  {:balance-repo  (balance-repository/->In-memory-balance-repo [])
+  {:balance-repo  (balance-repository/->In-memory-balance-repo (ref {}))
    :account-repo  (account-repository/->In-memory-account-repository (build-account-data))})
 
 (defn route []

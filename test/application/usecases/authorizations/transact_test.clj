@@ -12,9 +12,9 @@
 
 (def users (atom [{:id "123" :first-name "Diego" :last-name "Santos" :age 39}]))
 
-(def balances [{:id "1" :type "food" :code ["5411" "5412"] :total-amount 3000.00 :account-id "123"}
-               {:id "2" :type "meal" :code ["5811" "5812"] :total-amount 2000.00 :account-id "123"}
-               {:id "3" :type "cash" :code ["1111"] :total-amount 5000.00 :account-id "123"}])
+(def balances (ref {"1" {:id "1" :type "food" :code ["5411" "5412"] :total-amount 3000.00 :account-id "123"}
+                    "2" {:id "2" :type "meal" :code ["5811" "5812"] :total-amount 2000.00 :account-id "123"}
+                    "3" {:id "3" :type "cash" :code ["1111"] :total-amount 5000.00 :account-id "123"}}))
 
 (def transactions (atom [{:id "af5ea0ce-795c-41ee-b060-0c8788de79b5"
                           :account-id "123"

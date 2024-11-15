@@ -9,7 +9,7 @@
   (atom [{:id "123" :first-name "Diego" :last-name "Santos" :age 39 :document "10203040"}]))
 
 (defn deps []
-  {:balance-repo  (balance-repo/->In-memory-balance-repo [])
+  {:balance-repo  (balance-repo/->In-memory-balance-repo (ref {}))
    :account-repo  (account-repo/->In-memory-account-repository (build-account-data))})
 
 (deftest execute
