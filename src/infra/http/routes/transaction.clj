@@ -17,5 +17,5 @@
                                  [:mcc string?]
                                  [:merchant string?]]}
              :responses {200 {:body [:map
-                                     [:code [:enum "00" "05" "07"]]]}}
+                                     [:code [:enum "00" "51" "07"]]]}}
              :handler transaction-handler}}])
