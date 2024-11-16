@@ -7,7 +7,7 @@
    [application.repositories.transaction-repository :as transaction-repo]))
 
 (def authorized {:code "00"})
-(def insuficient-funds {:code "51"})
+(def insufficient-funds {:code "51"})
 (def not-authorized {:code "07"})
 
 (defn- is-processed-transaction? [transaction-repo transaction-id]
@@ -39,7 +39,7 @@
         (process-balance txn valid-balances balance-repo)
         (transaction-repo/create! transaction-repo txn)
         authorized)
-      insuficient-funds)))
+      insufficient-funds)))
 
 (defn execute [{:keys [id account-id] :as transaction} {:keys [account-repo transaction-repo] :as deps}]
   (dosync

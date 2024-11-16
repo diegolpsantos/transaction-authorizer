@@ -114,7 +114,7 @@ Example of output:
 ```
 
 {"code": "00"} // Success request
-{"code": "05"} // Insuficient funds
+{"code": "05"} // Insufficient funds
 {"code": "07"} // Any other problems that happen to the request and not authorizing the transaction 
 
 ```
