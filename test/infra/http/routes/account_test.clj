@@ -4,8 +4,8 @@
             [muuntaja.core :as m]
             [application.http.router :as router-port]
             [infra.http.reitit-adapter :as router-adapter]
-            [database.in-memory-account-repository :as account-repository]
-            [database.in-memory-balance-repository :as balance-repository]
+            [database.inmemory.atom-account-repository :as account-repository]
+            [database.inmemory.atom-balance-repository :as balance-repository]
             [infra.http.routes.account :as accounts]))
 
 (def account-path "/api/v1/priv/accounts")
@@ -14,8 +14,8 @@
   (atom [{:id "123" :first-name "Diego" :last-name "Santos" :age 39 :document "10203040"}]))
 
 (def deps
-  {:balance-repo  (balance-repository/->In-memory-balance-repo (ref {}))
-   :account-repo  (account-repository/->In-memory-account-repository (build-account-data))})
+  {:balance-repo  (balance-repository/->atom-balance-repo (ref {}))
+   :account-repo  (account-repository/->atom-account-repository (build-account-data))})
 
 (defn route []
   (-> deps

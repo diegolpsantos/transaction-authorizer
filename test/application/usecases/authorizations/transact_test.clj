@@ -1,10 +1,10 @@
 (ns application.usecases.authorizations.transact-test
   (:require [clojure.test :refer [deftest is testing]]
             [application.usecases.authorizations.transact :as transact]
-            [database.in-memory-balance-repository :as balance-repo]
-            [database.in-memory-account-repository :as account-repo]
-            [database.in-memory-merchant-repository :as merchant-repo]
-            [database.in-memory-transaction-repository :as transaction-repo]))
+            [database.inmemory.atom-balance-repository :as balance-repo]
+            [database.inmemory.atom-account-repository :as account-repo]
+            [database.inmemory.atom-merchant-repository :as merchant-repo]
+            [database.inmemory.atom-transaction-repository :as transaction-repo]))
 
 (def merchant-name "UBER EATS                   SAO PAULO BR")
 
@@ -23,10 +23,10 @@
                           :merchant "PADARIA DO ZE               SAO PAULO BR"}]))
 
 (defn deps [] 
-  {:balance-repo     (balance-repo/->In-memory-balance-repo balances)
-   :account-repo     (account-repo/->In-memory-account-repository users)
-   :merchant-repo    (merchant-repo/->In-memory-merchant-repository merchants)
-   :transaction-repo (transaction-repo/->In-memory-transaction-repository transactions)})
+  {:balance-repo     (balance-repo/->atom-balance-repo balances)
+   :account-repo     (account-repo/->atom-account-repository users)
+   :merchant-repo    (merchant-repo/->atom-merchant-repository merchants)
+   :transaction-repo (transaction-repo/->atom-transaction-repository transactions)})
 
 (deftest execute
   (let [deps (deps)]

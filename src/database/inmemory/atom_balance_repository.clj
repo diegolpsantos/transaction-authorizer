@@ -1,17 +1,14 @@
-(ns database.in-memory-balance-repository
-  (:require [application.repositories.balance-repository :as repo]))
+(ns database.inmemory.atom-balance-repository
+  (:require [application.repositories.balance-repository :as repo]
+            [database.uuid-generator :as id-generator]))
 
-(defn- generate-uuid []
-  (-> (random-uuid)
-      (str)))
-
-(defrecord In-memory-balance-repo [state]
+(defrecord atom-balance-repo [state]
   repo/BalanceRepository
   
   (create [_ account-id]
-    (let [food-id (generate-uuid)
-          meal-id (generate-uuid)
-          cash-id (generate-uuid)]
+    (let [food-id (id-generator/generate)
+          meal-id (id-generator/generate)
+          cash-id (id-generator/generate)]
       (alter state
              conj
              {food-id {:id food-id :type "food" :code ["5411" "5412"] :total-amount 0.00 :account-id account-id}}

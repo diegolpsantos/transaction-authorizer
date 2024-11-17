@@ -1,15 +1,12 @@
-(ns database.in-memory-account-repository
-  (:require [application.repositories.account-repository :as repo]))
+(ns database.inmemory.atom-account-repository
+  (:require [application.repositories.account-repository :as repo]
+            [database.uuid-generator :as id-gen]))
 
-(defn- generate-uuid []
-  (-> (random-uuid)
-      (str)))
-
-(defrecord In-memory-account-repository [state]
+(defrecord atom-account-repository [state]
   repo/AccountRepository
 
   (create [_ account]
-    (let [account-with-id (assoc account :id (generate-uuid))]
+    (let [account-with-id (assoc account :id (id-gen/generate))]
       (swap! state conj account-with-id)
       account-with-id))
 

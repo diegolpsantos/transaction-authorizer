@@ -4,10 +4,10 @@
             [muuntaja.core :as m]
             [application.http.router :as router-port]
             [infra.http.reitit-adapter :as router-adapter]
-            [database.in-memory-account-repository :as account-repository]
-            [database.in-memory-merchant-repository :as merchant-repository]
-            [database.in-memory-balance-repository :as balance-repository]
-            [database.in-memory-transaction-repository :as transaction-repo]
+            [database.inmemory.atom-account-repository :as account-repository]
+            [database.inmemory.atom-merchant-repository :as merchant-repository]
+            [database.inmemory.atom-balance-repository :as balance-repository]
+            [database.inmemory.atom-transaction-repository :as transaction-repo]
             [infra.http.routes.transaction :as transaction]))
 
 (def transactions-path "/api/v1/transactions")
@@ -28,10 +28,10 @@
                           :mcc "5811"
                           :merchant "PADARIA DO ZE               SAO PAULO BR"}]))
 
-(def deps {:account-repo     (account-repository/->In-memory-account-repository users)
-           :merchant-repo    (merchant-repository/->In-memory-merchant-repository merchants)
-           :balance-repo     (balance-repository/->In-memory-balance-repo balances)
-           :transaction-repo (transaction-repo/->In-memory-transaction-repository transactions)})
+(def deps {:account-repo     (account-repository/->atom-account-repository users)
+           :merchant-repo    (merchant-repository/->atom-merchant-repository merchants)
+           :balance-repo     (balance-repository/->atom-balance-repo balances)
+           :transaction-repo (transaction-repo/->atom-transaction-repository transactions)})
 
 (defn route []
   (-> deps
