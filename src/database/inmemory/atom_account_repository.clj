@@ -13,7 +13,7 @@
   (get-by-id [_ id]
     (first (filter #(= id (:id %))
                    @state)))
-  
+
   (get-by-document [_ document]
-             (first (filter #(= document (:document %))
-                            @state))))
+    (first (filter #(= document (:document %))
+                   @state))))

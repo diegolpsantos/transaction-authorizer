@@ -4,9 +4,9 @@
 
 (defrecord sql-transaction-repository [connection]
   transaction-repo/transaction-repository
-  
+
   (create! [_ transaction]
     (conn/insert! connection :transactions transaction))
-  
+
   (get-by-id [_ id]
     (conn/find-by-id connection :transactions id)))

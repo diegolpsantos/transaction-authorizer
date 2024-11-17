@@ -4,11 +4,11 @@
 
 (defrecord sql-account-repository [connection]
   repo/AccountRepository
-  
+
   (create [_ account]
     (let [created-account (conn/insert! connection :accounts account)]
       created-account))
-  
+
   (get-by-id [_ id]
     (conn/find-by-id connection :accounts {:id id}))
 

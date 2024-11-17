@@ -3,7 +3,7 @@
             [application.repositories.balance-repository :as balance-repository]))
 
 (defn execute [{:keys [document] :as account} {:keys [account-repo balance-repo]}]
-  (let [existent-account (account-repository/get-by-document account-repo document)] 
+  (let [existent-account (account-repository/get-by-document account-repo document)]
     (if (nil? existent-account)
       (let [{:keys [id] :as inserted-account} (account-repository/create account-repo account)]
         (dosync (balance-repository/create balance-repo id))

@@ -54,7 +54,7 @@
       (is (match? {:status 200} response))
       (is (match? {:code "00"}
                   (m/decode-response-body response)))))
-  
+
   (testing "should return bad request when data is invalid"
     (let [route    (route)
           response (route {:request-method :post
@@ -63,7 +63,7 @@
                                             "accept"       "application/transit+json"}
                            :body-params    {:amount 10.0}})]
       (is (match? {:status 400} response))))
-  
+
   (testing "should return Method Not Allowed when request method is invalid"
     (let [route    (route)
           response (route {:request-method :delete

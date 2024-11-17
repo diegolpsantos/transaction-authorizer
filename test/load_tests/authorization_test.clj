@@ -21,7 +21,7 @@
    :throw-exceptions false})
 
 (defn localhost-request [_]
-  (let [{:keys [status body]} (http/post "http://localhost:8080/api/v1/transactions" (option (input))) 
+  (let [{:keys [status body]} (http/post "http://localhost:8080/api/v1/transactions" (option (input)))
         ch-boy (json/parse-string body true)]
     (and (= status 200)
          (= ch-boy {:code "00"}))))

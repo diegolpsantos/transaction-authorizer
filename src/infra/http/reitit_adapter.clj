@@ -66,6 +66,6 @@
 
 (defrecord reitit-adapter [routes]
   router/router
-  
+
   (create [_]
     (create-routes routes)))

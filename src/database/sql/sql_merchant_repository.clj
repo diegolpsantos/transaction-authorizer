@@ -4,6 +4,6 @@
 
 (defrecord sql-merchant-repository [connection]
   merchant-repo/MerchantRepository
-  
+
   (get-by-name [_ name]
     (conn/find-by-keys connection :merchants {:name name})))

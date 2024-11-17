@@ -6,7 +6,7 @@
 
   (create! [_ transaction]
     (swap! state conj transaction))
-  
+
   (get-by-id [_ id]
     (first (filter #(= id (:id %))
                    @state))))

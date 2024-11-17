@@ -4,7 +4,7 @@
 
 (defrecord atom-balance-repo [state]
   repo/BalanceRepository
-  
+
   (create [_ account-id]
     (let [food-id (id-generator/generate)
           meal-id (id-generator/generate)
@@ -18,7 +18,7 @@
   (update! [_ {:keys [id total-amount]}]
     (alter state update id (fn [v] (update v :total-amount (fn [_]
                                                              total-amount)))))
-  
+
   (get-by-account-id [_ id]
     (filter #(= id (:account-id %))
             (vals @state))))
