@@ -16,7 +16,8 @@
         org.clojure/java.jdbc                               {:mvn/version "0.7.12"}
         org.postgresql/postgresql                           {:mvn/version "42.6.0"}
         camel-snake-kebab/camel-snake-kebab                 {:mvn/version "0.4.3"}
-        clj-postgresql/clj-postgresql                       {:mvn/version "0.7.0"}}
+        clj-postgresql/clj-postgresql                       {:mvn/version "0.7.0"} 
+        clojure.java-time/clojure.java-time                 {:mvn/version "1.4.3"}}
  :aliases
  {:run-m {:main-opts ["-m" "transaction-authorizer.core"]
           :jvm-opts ["-Dclojure.tools.logging.factory=clojure.tools.logging.impl/log4j2-factory"]}

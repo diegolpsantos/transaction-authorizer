@@ -44,7 +44,8 @@
     (let [mcc-balance  (get-mcc-balance mcc balances)
           cash-balance (cash-balance balances)]
       (cond
-        (nil? mcc-balance) [(decreased cash-balance total-amount)]
+        (or (nil? mcc-balance)
+            (= (:total-amount mcc-balance) 0.0M)) [(decreased cash-balance total-amount)]
         (< (:total-amount mcc-balance) total-amount) (let [nmcc-value (decreased mcc-balance total-amount)
                                                            nc-value   (decreased cash-balance (:rest nmcc-value))]
                                                        [nmcc-value nc-value])

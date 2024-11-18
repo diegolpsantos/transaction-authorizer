@@ -8,5 +8,8 @@
     (swap! state conj transaction))
 
   (get-by-id [_ id]
-    (first (filter #(= id (:id %))
-                   @state))))
+    (let [result (first (filter #(= id (:id %))
+                                @state))]
+      (if (nil? result)
+        {}
+        result))))

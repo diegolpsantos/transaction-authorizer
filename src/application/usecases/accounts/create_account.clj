@@ -4,8 +4,9 @@
 
 (defn execute [{:keys [document] :as account} {:keys [account-repo balance-repo]}]
   (let [existent-account (account-repository/get-by-document account-repo document)]
-    (if (nil? existent-account)
+    (if (or (nil? existent-account)
+            (= {} existent-account))
       (let [{:keys [id] :as inserted-account} (account-repository/create account-repo account)]
-        (dosync (balance-repository/create balance-repo id))
+        (balance-repository/create balance-repo id)
         inserted-account)
       existent-account)))

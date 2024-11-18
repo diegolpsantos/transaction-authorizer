@@ -7,10 +7,11 @@
 (defn -main
   "Invoke me with clojure -M -m transaction-authorizer.core"
   [& args]
-  (->> args
-       stm/config
-       constantly
-       (alter-var-root #'service)))
+  (let [env (first args)]
+    (->> env
+         stm/config
+         constantly
+         (alter-var-root #'service))))
 
 (defn -close []
   (.stop service))

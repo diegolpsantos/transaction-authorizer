@@ -1,8 +1,7 @@
 (ns database.sql.sql-balance-repository
   (:require [application.repositories.balance-repository :as repo]
             [application.database.connection :as conn]
-            [database.uuid-generator :as id-generator]
-            [database.sql.postgres-connection-adapter :as conn-adapter]))
+            [database.uuid-generator :as id-generator]))
 
 (defrecord sql-balance-repository [connection]
   repo/BalanceRepository
@@ -17,18 +16,3 @@
 
   (get-by-account-id [_ account-id]
     (conn/find-by-keys connection :balances {:account-id account-id})))
-
-(comment
-  (def db-config
-    {:dbtype "postgresql"
-     :jdbcUrl "jdbc:postgresql://localhost:5432/transaction_authorizer"
-     :user "postgres"
-     :password "postgres"})
-
-  (def cp (conn-adapter/->postgres-connection-adapter db-config))
-
-  (def a (->sql-balance-repository cp))
-
-  (repo/get-by-account-id a "1a93bf01-ee92-4db4-8df4-b5832b9edfcb")
-
-  (repo/create a "1a93bf01-ee92-4db4-8df4-b5832b9edfcb"))
